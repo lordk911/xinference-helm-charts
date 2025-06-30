@@ -3,7 +3,9 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: {{ .Values.storageClass.name | quote }}
-{{- toYaml .Values.storageClass.spec | nindent 0 }}
+{{- if .Values.storageClass.spec }}
+{{ toYaml .Values.storageClass.spec | nindent 0 }}
+{{- end }}
 {{- end }}
 
 ---
