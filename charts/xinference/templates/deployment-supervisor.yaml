@@ -39,9 +39,6 @@ spec:
   resources:
     requests:
       storage: {{ .Values.pvc.sharedVolumeClaim.storageRequest | quote }}
-  selector:
-    matchLabels:
-      pv: xinference-pv
 {{- end }}
 
 ---
