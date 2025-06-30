@@ -4,6 +4,32 @@ config:
   curl_image: curlimages/curl:8.8.0
   image_pull_policy: ""
   worker_num: 1
+  # 新增：单独配置每个 worker 的资源（如 GPU），如未配置则使用全局配置
+  workers: []
+  # 示例：
+  # workers:
+  #   - name: worker-0
+  #     resources:
+  #       requests:
+  #         cpu: "2"
+  #         memory: 8Gi
+  #         nvidia.com/gpu: "1"
+  #       limits:
+  #         cpu: "2"
+  #         memory: 8Gi
+  #         nvidia.com/gpu: "1"
+  #     vgpu:
+  #       enabled: true
+  #       resources:
+  #         requests:
+  #           cpu: "2"
+  #           memory: 8Gi
+  #         limits:
+  #           cpu: "2"
+  #           memory: 8Gi
+  #           nvidia.com/gpu: "1"
+  #           nvidia.com/gpumem-percentage: 50
+  #           nvidia.com/gpucores: 50
   model_src: "huggingface"
   persistence:
     enabled: false
