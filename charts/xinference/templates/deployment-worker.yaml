@@ -101,14 +101,16 @@ spec:
   selector:
     matchLabels:
       app: xinference-worker
-    {{- include "charts.selectorLabels" $ | nindent 6 }}
+      worker-name: {{ $worker.name | default (printf "worker-%d" $i) }}
+      {{- include "charts.selectorLabels" $ | nindent 6 }}
   strategy:
     type: {{ $.Values.xinferenceWorker.strategy.type }}
   template:
     metadata:
       labels:
         app: xinference-worker
-      {{- include "charts.selectorLabels" $ | nindent 8 }}
+        worker-name: {{ $worker.name | default (printf "worker-%d" $i) }}
+        {{- include "charts.selectorLabels" $ | nindent 8 }}
     spec:
       {{- if $.Values.config.imagePullSecrets }}
       imagePullSecrets:
