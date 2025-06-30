@@ -42,6 +42,7 @@ spec:
   selector:
     matchLabels:
       pv: xinference-pv
+{{- end }}
 
 ---
 apiVersion: apps/v1
