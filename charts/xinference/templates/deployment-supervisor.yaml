@@ -108,7 +108,9 @@ spec:
         volumeMounts:
           - mountPath: {{ .Values.config.persistence.mountPath }}
             name: xinference-home
+{{- end }}
       volumes:
+{{- if .Values.config.persistence.enabled }}
         - name: xinference-home
           persistentVolumeClaim:
             claimName: xinference-shared-volume-claim
