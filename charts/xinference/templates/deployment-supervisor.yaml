@@ -1,11 +1,13 @@
-{{- if .Values.config.persistence.enabled }}
+{{- if and .Values.config.persistence.enabled .Values.config.createDefaultStorageResources }}
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: {{ .Values.storageClass.name | quote }}
 {{- toYaml .Values.storageClass.spec | nindent 0 }}
+{{- end }}
 
 ---
+{{- if and .Values.config.persistence.enabled .Values.config.createDefaultStorageResources }}
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -14,8 +16,10 @@ metadata:
     pv: xinference-pv
   {{- include "charts.labels" . | nindent 4 }}
 spec: {{- toYaml .Values.pv | nindent 2 }}
+{{- end }}
 
 ---
+{{- if .Values.config.persistence.enabled }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -36,7 +40,6 @@ spec:
   selector:
     matchLabels:
       pv: xinference-pv
-{{- end }}
 
 ---
 apiVersion: apps/v1

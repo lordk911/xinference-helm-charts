@@ -10,6 +10,7 @@ config:
     mountPath: "/data"
   # any other environments
   extra_envs: {}
+  createDefaultStorageResources: true
 storageClass:
   name: local-storage
   spec:
