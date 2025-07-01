@@ -24,11 +24,6 @@ spec:
         {{- toYaml .Values.config.imagePullSecrets | nindent 8 }}
       {{- end }}
       initContainers:
-{{- if $.Values.xinferenceWorker.staggeredStart.enabled }}
-      - name: staggered-start
-        image: {{ $.Values.config.curl_image | quote }}
-        command: ['sh', '-c', 'sleep {{ mul $i $.Values.xinferenceWorker.staggeredStart.delaySeconds }}']
-{{- end }}
       - name: check-supervisor
         image: {{ .Values.config.curl_image | quote }}
         command: {{- toYaml .Values.xinferenceWorker.worker.initContainers.command | nindent 8 }}
