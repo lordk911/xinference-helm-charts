@@ -129,6 +129,9 @@ xinferenceSupervisor:
 xinferenceWorker:
   strategy:
     type: Recreate
+  staggeredStart:
+    enabled: false
+    delaySeconds: 10
   worker:
     initContainers:
       command: [ 'sh', '-c', "until curl -v http://service-supervisor:9997/v1/address; do echo waiting for supervisor; sleep 1; done" ]
