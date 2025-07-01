@@ -26,6 +26,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: xinference-shared-volume-claim
+  annotations:
+    "helm.sh/resource-policy": keep
   labels:
   {{- include "charts.labels" . | nindent 4 }}
 spec:
